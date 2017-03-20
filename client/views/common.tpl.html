@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-xs-2">You are logged in as</div>
+    <div class="col-xs-3">{{::user.username}}</div>
+
+</div>
+
+<div class="row">
+    <div class="col-xs-2">Account:</div>
+    <div class="col-xs-3">{{::user.accountNumber}}</div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-2">Card #:</div>
+    <div class="col-xs-3">{{::user.cardNumber}}</div>
+</div>
+
+<div class="row">
+    <div class="col-xs-2">Expired on:</div>
+    <div class="col-xs-3">{{::user.expDate | date : 'M/yyyy'}}</div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-xs-2">Balance:</div>
+    <div class="col-xs-3">{{user.balance | currency}}</div>
+</div>
+
+<form action="" class="form-horizontal" novalidate name="withdraw">
+    <input type="text" ng-model="user.expDate" checkdate expdate="{{user.expDate}}">
+    <label for="sum" class="col-sm-6 control-label">Withdraw money:</label>
+    <div class="col-sm-3">
+        <input type="number" step="100" min="100" required
+               name="sum"
+               ng-pattern="/^[0-9]+$/"
+               id="sum" ng-model="sum" class="form-control"
+               ng-change="validateSum(withdraw)"
+        >
+        <div  ng-show="withdraw.$submitted || withdraw.sum.$touched">
+            <p ng-show="withdraw.sum.$error.required">
+                This field is required!
+            </p>
+            <p ng-show="!reqSumIsValid">
+                Please input correct sum!
+            </p>
+        </div>
+        <br>
+        <div>
+            <input
+                    type="submit"
+                    class="btn btn-primary"
+                    ng-disabled="withdraw.$invalid || !reqSumIsValid"
+                    ng-click="withdrawMoney()" value="Confirm">
+            <input type="submit" class="btn btn-danger" ng-click="logout()" value="Exit">
+        </div>
+    </div>
+</form>

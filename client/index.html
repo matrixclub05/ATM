@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <base href="/">
+    <title>{%= o.htmlWebpackPlugin.options.pkg.title %}</title>
+</head>
+<body ng-app="ATM">
+admin: 4916373417920945 pin: 1111
+<br>
+user: ‌4539616853437270 pin: 1111
+<div class="container">
+    <div class="jumbotron">
+        <h1>Welcome to our ATM application</h1>
+    </div>
+
+    <div class="row" ui-view></div>
+
+    <div class="modal" tabindex="-1" role="dialog" ng-class="{'info-modal': showInfoModal}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="showInfoModal=false">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" ng-if="error">Error: {{info.message}}</h4>
+                    <h4 class="modal-title" ng-if="!error"> {{info.message}}</h4>
+                </div>
+                <div class="modal-body" ng-if="error">
+                    <p>Requested sum is {{info.reqSum | currency}}.</p>
+                    <p>Current balance is {{info.balance | currency}}.</p>
+                </div>
+                <div class="modal-body" ng-if="!error">
+                    <p>There are your {{info.reqSum | currency}}.</p>
+                    <p>Current balance is {{info.balance | currency}}.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="showInfoModal=false">Close</button>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</div>
+
+
+<script src="bundle.js?{%= o.htmlWebpackPlugin.options.nocache %}"></script>
+</body>
+</html>

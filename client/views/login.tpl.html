@@ -1,0 +1,54 @@
+
+<form name="form" role="form" class="form-horizontal" novalidate>
+
+        <div class="form-group">
+            <label for="cardNumber" class="col-sm-6 control-label">Please enter your credit card number:</label>
+            <div class="col-sm-6">
+                <input type="text"
+                       name="cardNumber"
+                       id="cardNumber"
+                       cc-number
+                       required
+                       ng-required="true"
+                       ng-model="user.cardNumber"
+                       class="form-control"
+                       cc-type="Visa"
+
+                >
+            </div>
+            <div class="col-sm-6 pull-right" ng-show="form.$submitted || form.cardNumber.$touched">
+                <p ng-if="form.cardNumber.$error.ccNumberType">That's not a valid Visa card number</p>
+                <p ng-if="form.cardNumber.$valid">
+                    Yes, that looks like a valid {{form.cardNumber.$ccType}} number!
+                </p>
+                <p ng-if="form.cardNumber.$error.required">
+                    You must enter a credit card number!
+                </p>
+            </div>
+
+
+        </div>
+        <div class="form-group">
+            <label for="pin" class="col-sm-6 control-label">PIN code:</label>
+            <div class="col-sm-6">
+                <input type="password"
+                       name="pin"
+                       id="pin"
+                       required
+                       ng-model="user.pin"
+                       class="form-control"
+                       ng-pattern="/^[0-9]{4}$/"
+                >
+                <div ng-show="form.$submitted || form.pin.$touched" >
+                    <div ng-show="form.pin.$error.required">Please enter your pin</div>
+                    <div ng-show="form.pin.$error.pattern">Please enter valid pin</div>
+                </div>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <button ng-disabled="form.$invalid" class="btn btn-primary pull-right" ng-click="login(form)">Enter</button>
+        </div>
+    </div>
+
+</form>
