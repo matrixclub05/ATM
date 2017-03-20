@@ -6,8 +6,6 @@ var path = require('path'),
     autoprefixer = require('autoprefixer'),
     HtmlWebpackPlugin = require('html-webpack-plugin');
 
-
-
 var isProduction = process.env.NODE_ENV;
 var config = {
     entry: path.join(clientPath, 'index.js'),
@@ -28,11 +26,7 @@ var config = {
         }, {
             test: /\.(png|jpg)$/,
             loader: 'file-loader?name=img/[name].[ext]' // inline base64 URLs for <=10kb images, direct URLs for the rest
-        },/* {
-            test: /\.js$/,
-            exclude: /(node_modules)/,
-            loader: "ng-annotate-loader?add=true!babel-loader"
-        }, */{
+        },{
             test: /\.css$/,
             loaders: ['style', 'css']
         }, {

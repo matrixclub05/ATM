@@ -6,9 +6,6 @@
     <title>{%= o.htmlWebpackPlugin.options.pkg.title %}</title>
 </head>
 <body ng-app="ATM">
-admin: 4916373417920945 pin: 1111
-<br>
-user: ‌4539616853437270 pin: 1111
 <div class="container">
     <div class="jumbotron">
         <h1>Welcome to our ATM application</h1>
@@ -35,8 +32,7 @@ user: ‌4539616853437270 pin: 1111
                     <p>Current balance is {{info.balance | currency}}.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" ng-click="showInfoModal=false">Close</button>
-
+                    <button type="button" class="btn btn-default" ng-click="showInfoModal=false">Close ({{timeToExit}})</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

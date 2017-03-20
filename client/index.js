@@ -16,12 +16,12 @@ angular.module('ATM', ['ui.router', 'ngCookies', 'core', 'directives', creditCar
         var lastDigestRun = Date.now();
         var idleCheck = $interval(function() {
             var now = Date.now();
-            if (now - lastDigestRun > 400*1000 && AuthService.isAuthenticated()) {
+            if (now - lastDigestRun > 5*60*1000 && AuthService.isAuthenticated()) {
 
                 AuthService.logout().then(function () {
+                    $rootScope.showInfoModal = false;
                     $state.go('login');
                 });
-
             }
         }, 1000);
 
@@ -33,7 +33,7 @@ angular.module('ATM', ['ui.router', 'ngCookies', 'core', 'directives', creditCar
             event.preventDefault();
         }
 
-        if (next.name !== 'login') {
+        if (next.name !== 'login' && next.name !== 'error') {
 
             var authorizedRoles = next.data.authorizedRoles;
 
@@ -41,18 +41,17 @@ angular.module('ATM', ['ui.router', 'ngCookies', 'core', 'directives', creditCar
 
                 event.preventDefault();
 
-                if (AuthService.isAuthenticated())
+                if (AuthService.isAuthenticated()){
                     $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-                else
+                } else {
                     $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+                }
 
                 $state.go('login');
-
-
             }
-        } else if (next.name == 'admin' && AuthService.isAdmin())
+        } else if (next.name == 'admin' && AuthService.isAdmin()){
             $state.go('admin');
-
+        }
 
     })
 

@@ -4,12 +4,16 @@
 (function () {
     'use strict';
 
-    UserController.$inject = ['$scope', '$rootScope', 'AuthService', 'Account', '$state'];
+    UserController.$inject = ['$scope', '$rootScope', 'AuthService', 'Account', '$state', '$interval'];
 
-    function UserController($scope, $rootScope, AuthService, Account, $state) {
+    function UserController($scope, $rootScope, AuthService, Account, $state, $interval) {
         $scope.showModal = false;
         $scope.user = $scope.$parent.currentUser;
         $scope.reqSumIsValid = false;
+
+        $rootScope.timeToExit = 10;
+
+        var intervalToken;
 
         $scope.validateSum = function (form) {
             if(form){
@@ -28,6 +32,15 @@
                 $scope.user.balance = info.balance;
                 $rootScope.showInfoModal = true;
 
+                intervalToken = $interval(function () {
+
+                    $rootScope.timeToExit -= 1;
+                    if($rootScope.timeToExit === 0){
+                        stopTimer();
+                        $scope.logout();
+                    }
+                }, 1000);
+
             }).catch(function (err) {
 
                 $rootScope.info = err.data;
@@ -41,8 +54,15 @@
             AuthService.logout().then(function () {
                 $state.go('login');
             })
-        }
+        };
 
+        $scope.$on('$destroy', function() {
+            stopTimer();
+        });
+
+        function stopTimer() {
+            $interval.cancel(intervalToken);
+        }
 
     }
 

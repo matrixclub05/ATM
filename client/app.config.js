@@ -28,7 +28,18 @@
                 template: require('./views/common.tpl.html'),
                 controller: require('./controllers/user'),
                 authenticate: true,
-                data: {authorizedRoles: [USER_ROLES.admin]}
+                data: {authorizedRoles: [USER_ROLES.common]}
+            })
+            .state('error', {
+                parent: 'base',
+                url: '/error',
+                template: require('./views/error.tpl.html'),
+                controller: require('./controllers/error'),
+                authenticate: false,
+                params: {
+                    credsError: ''
+                }
+
             })
             .state('normal', {
                 parent: 'base',

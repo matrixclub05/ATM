@@ -128,20 +128,16 @@ module.exports = {
                 var user = module.exports.findOne(cardNumber, pin);
 
                 if(!user) {
-                    done(null, false, { message: 'Incorrect username.' });
+                    done(null, false, { message: 'Invalid card number or pin code' });
                 }
                 else if(user.pin != pin) {
-                    done(null, false, { message: 'Incorrect username.' });
+                    done(null, false, { message: 'Invalid card number or pin code' });
                 }
                 else {
                     return done(null, user);
                 }
-
             })
-
     },
-
-
 
     serializeUser: function (user, done) {
         done(null, user.cardNumber);

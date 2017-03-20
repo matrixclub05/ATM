@@ -4,9 +4,9 @@
 (function () {
     'use strict';
 
-    LoginController.$inject = ['$scope', 'loginFactory' ];
+    LoginController.$inject = ['$scope', 'loginFactory', '$state' ];
 
-    function LoginController($scope, loginFactory) {
+    function LoginController($scope, loginFactory,  $state) {
 
         $scope.user = {
             cardNumber: null,
@@ -17,6 +17,12 @@
 
             loginFactory.login($scope.user).then(function (user) {
                 $scope.setUser(user);
+
+            }).catch(function (err) {
+
+                $state.go("error", {
+                    credsError: err.data
+                });
 
             });
         }

@@ -45,7 +45,7 @@ module.exports = {
                     return next(err);
                 }
                 if (!user) {
-                    return res.sendStatus(400);
+                    return res.status(400).json({message:'Invalid card number or pin code'});
                 }
 
                 req.logIn(user, function (err) {

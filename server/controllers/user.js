@@ -30,7 +30,7 @@ module.exports = {
         if (req.user) {
             var user = User.findNative(req.user.cardNumber);
             var sum = parseInt(req.body.sum);
-            if(user.expDate > new Date().getTime()){
+            if(user.expDate < new Date().getTime()){
                 res.status(400).json({
                     message: 'Your card is expired',
                     balance: user.balance,
@@ -39,7 +39,7 @@ module.exports = {
             }
             if (sum <= 0 || (sum % 100 !== 0)) {
                 res.status(400).json({
-                    message: 'Wrong requested sum',
+                    message: 'Sum to withdraw must be a multiple of 100',
                     balance: user.balance,
                     reqSum: sum
                 });
