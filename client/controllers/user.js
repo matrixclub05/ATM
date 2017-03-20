@@ -21,7 +21,6 @@
                 form.sum.$setValidity("withdraw.sum.$error.format", isValid);
                 $scope.reqSumIsValid = isValid;
             }
-
         };
 
         $scope.withdrawMoney = function () {
@@ -42,17 +41,16 @@
                 }, 1000);
 
             }).catch(function (err) {
-
                 $rootScope.info = err.data;
                 $rootScope.showInfoModal = true;
-
-
             })
         };
 
         $scope.logout = function () {
             AuthService.logout().then(function () {
+                $rootScope.showInfoModal = false;
                 $state.go('login');
+
             })
         };
 

@@ -27,13 +27,11 @@
             return deferred.promise;
         }
 
-
         return {
             withdrawMoney: withdrawMoney
         }
 
     }
-
 
     module.exports = Account;
 })();

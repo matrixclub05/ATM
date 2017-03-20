@@ -12,7 +12,7 @@ var creditCards = require('angular-credit-cards');
 angular.module('ATM', ['ui.router', 'ngCookies', 'core', 'directives', creditCards])
 
     .run(function ($rootScope, $state, $http, AUTH_EVENTS, AuthService, $interval) {
-
+/*
         var lastDigestRun = Date.now();
         var idleCheck = $interval(function() {
             var now = Date.now();
@@ -23,11 +23,11 @@ angular.module('ATM', ['ui.router', 'ngCookies', 'core', 'directives', creditCar
                     $state.go('login');
                 });
             }
-        }, 1000);
+        }, 1000);*/
 
     $rootScope.$on('$stateChangeStart', function (event, next) {
 
-        lastDigestRun = Date.now();
+        //lastDigestRun = Date.now();
         if (next.authenticate && !AuthService.isAuthenticated()){
             $state.transitionTo("login");
             event.preventDefault();
