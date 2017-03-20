@@ -7,6 +7,10 @@
 </head>
 <body ng-app="ATM">
 <div class="container">
+    <ul class="nav nav-pills" ng-if="currentUser.role=='admin'">
+        <li role="presentation" ui-sref-active="active"><a ui-sref="user" >Account</a></li>
+        <li role="presentation" ui-sref-active="active"><a ui-sref="admin">Admin page</a></li>
+    </ul>
     <div class="jumbotron">
         <h1>Welcome to our ATM application</h1>
     </div>
@@ -32,7 +36,7 @@
                     <p>Current balance is {{info.balance | currency}}.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" ng-click="showInfoModal=false">Close ({{timeToExit}})</button>
+                    <button type="button" class="btn btn-default" ng-click="logout()">Close ({{timeToExit}})</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

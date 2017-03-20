@@ -4,10 +4,15 @@
 (function () {
     'use strict';
 
-    AdminController.$inject = ['$scope', '$rootScope', 'AuthService', 'Account', '$state'];
+    AdminController.$inject = ['$scope', 'Admin'];
 
-    function AdminController($scope, $rootScope, AuthService, Account, $state) {
-
+    function AdminController($scope, Admin) {
+        Admin.getAllUsers().then(function (data) {
+            $scope.users = data;
+        });
+        $scope.$on('destroy', function () {
+            $scope.users = {};
+        })
     }
 
     module.exports = AdminController;

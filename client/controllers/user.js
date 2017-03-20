@@ -13,7 +13,7 @@
 
         $rootScope.timeToExit = 10;
 
-        var intervalToken;
+
 
         $scope.validateSum = function (form) {
             if(form){
@@ -31,7 +31,7 @@
                 $scope.user.balance = info.balance;
                 $rootScope.showInfoModal = true;
 
-                intervalToken = $interval(function () {
+                $scope.intervalToken = $interval(function () {
 
                     $rootScope.timeToExit -= 1;
                     if($rootScope.timeToExit === 0){
@@ -46,7 +46,7 @@
             })
         };
 
-        $scope.logout = function () {
+        $rootScope.logout = function () {
             AuthService.logout().then(function () {
                 $rootScope.showInfoModal = false;
                 $state.go('login');
@@ -59,7 +59,7 @@
         });
 
         function stopTimer() {
-            $interval.cancel(intervalToken);
+            $interval.cancel($scope.intervalToken);
         }
 
     }

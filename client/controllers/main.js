@@ -16,7 +16,7 @@
             $scope.currentUser = user;
             $rootScope.currentUser = user;
             AuthService.newSession(user);
-            $location.path(user.role == USER_ROLES.admin ? '/admin' : '/user');
+            $location.path( '/user');
         };
 
         $scope.getUser = function () {

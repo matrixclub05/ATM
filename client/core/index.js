@@ -23,6 +23,7 @@
         .service('Session',require('../services/session'))
         .factory('loginFactory', require('../services/login'))
         .factory('AuthService', require('../services/auth'))
+        .factory('Admin', require('../services/admin'))
         .factory('Account', require('../services/account'));
 
     module.exports = core;

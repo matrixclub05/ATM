@@ -25,10 +25,10 @@
             .state('admin', {
                 parent: 'base',
                 url: '/admin',
-                template: require('./views/common.tpl.html'),
-                controller: require('./controllers/user'),
+                template: require('./views/admin.tpl.html'),
+                controller: require('./controllers/admin'),
                 authenticate: true,
-                data: {authorizedRoles: [USER_ROLES.common]}
+                data: {authorizedRoles: [USER_ROLES.admin]}
             })
             .state('error', {
                 parent: 'base',
@@ -41,7 +41,7 @@
                 }
 
             })
-            .state('normal', {
+            .state('user', {
                 parent: 'base',
                 url: '/user',
                 template: require('./views/common.tpl.html'),

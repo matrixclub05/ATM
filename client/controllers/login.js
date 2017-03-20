@@ -4,14 +4,16 @@
 (function () {
     'use strict';
 
-    LoginController.$inject = ['$scope', 'loginFactory', '$state' ];
+    LoginController.$inject = ['$scope', '$rootScope', 'loginFactory', '$state' ];
 
-    function LoginController($scope, loginFactory,  $state) {
+    function LoginController($scope, $rootScope, loginFactory,  $state) {
 
         $scope.user = {
             cardNumber: null,
             pin: null
         };
+
+        $rootScope.currentUser = $scope.user;
 
         $scope.login = function () {
 
